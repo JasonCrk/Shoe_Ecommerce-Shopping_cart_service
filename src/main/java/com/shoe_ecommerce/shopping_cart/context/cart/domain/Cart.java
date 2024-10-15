@@ -2,6 +2,7 @@ package com.shoe_ecommerce.shopping_cart.context.cart.domain;
 
 import com.shoe_ecommerce.shopping_cart.context.cart.domain.value_objects.CartId;
 import com.shoe_ecommerce.shopping_cart.context.cart.domain.value_objects.CartTotalCount;
+
 import com.shoe_ecommerce.shopping_cart.context.shared.domain.value_objects.UserId;
 
 import java.util.Objects;
@@ -15,6 +16,11 @@ public final class Cart {
         this.id = id;
         this.userId = userId;
         this.totalCount = totalCount;
+    }
+
+    public static Cart create(CartId id, UserId userId) {
+        Cart cart = new Cart(id, userId, new CartTotalCount(0));
+        return cart;
     }
 
     public CartId id() {

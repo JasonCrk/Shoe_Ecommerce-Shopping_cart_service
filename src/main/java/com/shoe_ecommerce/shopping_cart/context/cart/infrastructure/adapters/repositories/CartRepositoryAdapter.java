@@ -2,7 +2,9 @@ package com.shoe_ecommerce.shopping_cart.context.cart.infrastructure.adapters.re
 
 import com.shoe_ecommerce.shopping_cart.context.cart.domain.Cart;
 import com.shoe_ecommerce.shopping_cart.context.cart.domain.ports.repositories.CartRepository;
+import com.shoe_ecommerce.shopping_cart.context.cart.infrastructure.persistence.CartMapper;
 import com.shoe_ecommerce.shopping_cart.context.cart.infrastructure.persistence.JpaCartRepository;
+
 import com.shoe_ecommerce.shopping_cart.context.shared.domain.value_objects.UserId;
 
 import com.shoe_ecommerce.shopping_cart.shared.domain.Service;
@@ -20,6 +22,16 @@ public final class CartRepositoryAdapter implements CartRepository {
 
     @Override
     public Optional<Cart> findByUserId(UserId userId) {
-        return Optional.empty();
+        return repository.findByUserId(userId.uuid()).map(CartMapper::toEntity);
+    }
+
+    @Override
+    public boolean existsByUserId(UserId userId) {
+        return repository.existsByUserId(userId.uuid());
+    }
+
+    @Override
+    public Cart save(Cart cart) {
+        return CartMapper.toEntity(repository.save(CartMapper.toModel(cart)));
     }
 }

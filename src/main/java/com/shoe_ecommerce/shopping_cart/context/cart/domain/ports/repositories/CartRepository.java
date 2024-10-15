@@ -7,4 +7,6 @@ import java.util.Optional;
 
 public interface CartRepository {
     Optional<Cart> findByUserId(UserId userId);
+    boolean existsByUserId(UserId userId);
+    Cart save(Cart cart);
 }
