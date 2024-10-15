@@ -22,7 +22,7 @@ public class JpaCart {
     @Column(name = "id")
     private UUID id;
 
-    @Column(name = "user_id", columnDefinition = "BINARY(16)", nullable = false)
+    @Column(name = "user_id", columnDefinition = "BINARY(16)", nullable = false, unique = true)
     private UUID userId;
 
     @Column(name = "total_count", columnDefinition = "SMALLINT UNSIGNED", nullable = false)
