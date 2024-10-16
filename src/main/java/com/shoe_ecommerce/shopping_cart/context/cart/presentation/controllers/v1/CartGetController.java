@@ -2,6 +2,8 @@ package com.shoe_ecommerce.shopping_cart.context.cart.presentation.controllers.v
 
 import com.shoe_ecommerce.shopping_cart.context.cart.application.queries.total_cost.CartTotalCostQuery;
 import com.shoe_ecommerce.shopping_cart.context.cart.application.queries.total_cost.CartTotalCostResponse;
+import com.shoe_ecommerce.shopping_cart.context.cart.application.queries.total_items.CartTotalItemsQuery;
+import com.shoe_ecommerce.shopping_cart.context.cart.application.queries.total_items.CartTotalItemsResponse;
 
 import com.shoe_ecommerce.shopping_cart.shared.domain.bus.command.CommandBus;
 import com.shoe_ecommerce.shopping_cart.shared.domain.bus.query.QueryBus;
@@ -33,6 +35,18 @@ public class CartGetController extends RestApiController {
         return ResponseEntity.ok().body(
                 new HashMap<>() {{
                     put("total_cost", response.total());
+                }}
+        );
+    }
+
+    @GetMapping("/totalItems-items")
+    public ResponseEntity<HashMap<String, Serializable>> totalItems(@RequestHeader("X-User-Id") String userId)
+            throws QueryHandlerExecutionError {
+        CartTotalItemsResponse response = (CartTotalItemsResponse) this.ask(new CartTotalItemsQuery(userId));
+
+        return ResponseEntity.ok().body(
+                new HashMap<>() {{
+                    put("total_items", response.totalItems());
                 }}
         );
     }
