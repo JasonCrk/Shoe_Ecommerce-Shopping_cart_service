@@ -27,6 +27,10 @@ public final class Cart {
         totalCount = totalCount.increment();
     }
 
+    public void decrementTotalCount() {
+        totalCount = totalCount.decrement();
+    }
+
     public CartId id() {
         return id;
     }

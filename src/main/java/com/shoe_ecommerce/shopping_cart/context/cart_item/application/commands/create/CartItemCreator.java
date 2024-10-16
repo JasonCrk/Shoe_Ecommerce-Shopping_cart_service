@@ -54,7 +54,9 @@ public final class CartItemCreator {
         if (shoeInventoryAlreadyInTheCart) throw new ShoeInventoryAlreadyInTheCart();
 
         CartItem cartItem = CartItem.create(id, count, cart.id(), shoeInventoryId);
-
         cartItemRepository.save(cartItem);
+
+        cart.incrementTotalCount();
+        cartRepository.save(cart);
     }
 }

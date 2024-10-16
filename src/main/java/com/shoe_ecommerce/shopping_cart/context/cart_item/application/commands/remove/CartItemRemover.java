@@ -34,7 +34,7 @@ public final class CartItemRemover {
 
         cartItemRepository.deleteById(cartItem.id());
 
-        cart.incrementTotalCount();
+        cart.decrementTotalCount();
         cartRepository.save(cart);
     }
 }
