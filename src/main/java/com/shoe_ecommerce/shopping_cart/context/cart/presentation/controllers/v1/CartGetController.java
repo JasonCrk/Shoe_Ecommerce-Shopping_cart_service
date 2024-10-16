@@ -25,8 +25,8 @@ public class CartGetController extends RestApiController {
         super(commandBus, queryBus);
     }
 
-    @GetMapping("/total")
-    public ResponseEntity<HashMap<String, Serializable>> totalPrice(@RequestHeader("X-User-Id") String userId)
+    @GetMapping("/total-cost")
+    public ResponseEntity<HashMap<String, Serializable>> totalCost(@RequestHeader("X-User-Id") String userId)
             throws QueryHandlerExecutionError {
         CartTotalCostResponse response = (CartTotalCostResponse) this.ask(new CartTotalCostQuery(userId));
 
