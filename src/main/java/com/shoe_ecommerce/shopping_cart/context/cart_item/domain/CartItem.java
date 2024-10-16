@@ -9,7 +9,7 @@ import java.util.Objects;
 
 public final class CartItem {
     private final CartItemId id;
-    private final CartItemCount count;
+    private CartItemCount count;
     private final CartId cartId;
     private final ShoeInventoryId shoeInventoryId;
 
@@ -23,6 +23,10 @@ public final class CartItem {
     public static CartItem create(CartItemId id, CartItemCount count, CartId cartId, ShoeInventoryId shoeInventoryId) {
         CartItem cartItem = new CartItem(id, count, cartId, shoeInventoryId);
         return cartItem;
+    }
+
+    public void updateCount(CartItemCount cartItemCount) {
+        this.count = cartItemCount;
     }
 
     public CartItemId id() {

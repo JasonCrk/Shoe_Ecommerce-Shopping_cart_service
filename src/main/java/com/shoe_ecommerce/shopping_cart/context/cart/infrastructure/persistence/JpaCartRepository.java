@@ -7,5 +7,7 @@ import java.util.UUID;
 
 public interface JpaCartRepository extends JpaRepository<JpaCart, UUID> {
     Optional<JpaCart> findByUserId(UUID userId);
+
     boolean existsByUserId(UUID userId);
+    boolean existsByIdAndUserId(UUID id, UUID userId);
 }
