@@ -4,12 +4,16 @@ import com.shoe_ecommerce.shopping_cart.context.cart.domain.value_objects.CartId
 import com.shoe_ecommerce.shopping_cart.context.cart_item.domain.CartItem;
 import com.shoe_ecommerce.shopping_cart.context.cart_item.domain.value_objects.CartItemId;
 
+import com.shoe_ecommerce.shopping_cart.context.shared.domain.value_objects.ShoeInventoryId;
+
 import java.util.List;
 import java.util.Optional;
 
 public interface CartItemRepository {
-    List<CartItem> findAllByCartId(CartId cartId);
     Optional<CartItem> findById(CartItemId cartItemId);
+    List<CartItem> findAllByCartId(CartId cartId);
+
+    boolean existsByCartIdAndShoeInventoryId(CartId cartId, ShoeInventoryId shoeInventoryId);
 
     CartItem save(CartItem cartItem);
 

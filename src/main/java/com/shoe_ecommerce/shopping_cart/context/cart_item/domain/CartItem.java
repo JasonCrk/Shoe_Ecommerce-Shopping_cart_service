@@ -20,6 +20,11 @@ public final class CartItem {
         this.shoeInventoryId = shoeInventoryId;
     }
 
+    public static CartItem create(CartItemId id, CartItemCount count, CartId cartId, ShoeInventoryId shoeInventoryId) {
+        CartItem cartItem = new CartItem(id, count, cartId, shoeInventoryId);
+        return cartItem;
+    }
+
     public CartItemId id() {
         return id;
     }
