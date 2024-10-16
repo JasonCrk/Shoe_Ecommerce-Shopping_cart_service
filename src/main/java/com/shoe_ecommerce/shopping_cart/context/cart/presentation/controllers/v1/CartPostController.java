@@ -7,10 +7,14 @@ import com.shoe_ecommerce.shopping_cart.shared.domain.bus.command.CommandBus;
 import com.shoe_ecommerce.shopping_cart.shared.domain.bus.query.QueryBus;
 import com.shoe_ecommerce.shopping_cart.shared.infrastructure.RestApiController;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@Tag(name = "Cart - POSTs")
 @RestController
 @RequestMapping("/api/v1/carts")
 public class CartPostController extends RestApiController {
@@ -22,6 +26,7 @@ public class CartPostController extends RestApiController {
         this.uuidGenerator = uuidGenerator;
     }
 
+    @Operation(operationId = "Create a cart")
     @PostMapping
     public ResponseEntity<String> create(@RequestHeader("X-User-Id") String userId) {
         this.dispatch(new CreateCartCommand(uuidGenerator.generate(), userId));
