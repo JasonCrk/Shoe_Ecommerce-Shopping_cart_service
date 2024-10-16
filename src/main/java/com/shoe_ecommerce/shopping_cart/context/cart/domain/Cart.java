@@ -31,6 +31,10 @@ public final class Cart {
         totalCount = totalCount.decrement();
     }
 
+    public void emptyItems() {
+        totalCount = CartTotalCount.initialize();
+    }
+
     public CartId id() {
         return id;
     }

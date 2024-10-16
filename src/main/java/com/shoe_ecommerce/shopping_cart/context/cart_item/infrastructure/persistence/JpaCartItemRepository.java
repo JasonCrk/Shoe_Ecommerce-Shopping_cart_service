@@ -7,5 +7,8 @@ import java.util.UUID;
 
 public interface JpaCartItemRepository extends JpaRepository<JpaCartItem, UUID> {
     List<JpaCartItem> findByCartId(UUID cartId);
+
     boolean existsByCartIdAndShoeInventoryId(UUID cartId, UUID shoeInventoryId);
+
+    void deleteAllByCartId(UUID cartId);
 }

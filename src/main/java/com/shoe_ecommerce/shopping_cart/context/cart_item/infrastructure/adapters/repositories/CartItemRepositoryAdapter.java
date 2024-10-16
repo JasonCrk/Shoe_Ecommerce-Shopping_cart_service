@@ -55,4 +55,9 @@ public final class CartItemRepositoryAdapter implements CartItemRepository {
     public void deleteById(CartItemId cartItemId) {
         repository.deleteById(cartItemId.uuid());
     }
+
+    @Override
+    public void deleteAllByCartId(CartId cartId) {
+        repository.deleteAllByCartId(cartId.uuid());
+    }
 }

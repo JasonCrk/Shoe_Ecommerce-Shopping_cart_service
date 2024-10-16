@@ -18,4 +18,5 @@ public interface CartItemRepository {
     CartItem save(CartItem cartItem);
 
     void deleteById(CartItemId cartItemId);
+    void deleteAllByCartId(CartId cartId);
 }
