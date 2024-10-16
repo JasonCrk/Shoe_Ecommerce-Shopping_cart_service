@@ -3,13 +3,13 @@ package com.shoe_ecommerce.shopping_cart.shared.domain.value_objects;
 import java.util.Objects;
 
 public abstract class IntValueObject {
-    private final int value;
+    private final Integer value;
 
-    public IntValueObject(int value) {
+    public IntValueObject(Integer value) {
         this.value = value;
     }
 
-    public int value() {
+    public Integer value() {
         return this.value;
     }
 
@@ -20,7 +20,7 @@ public abstract class IntValueObject {
         if (object == null || getClass() != object.getClass()) return false;
 
         IntValueObject that = (IntValueObject) object;
-        return value == that.value;
+        return value.equals(that.value);
     }
 
     @Override
