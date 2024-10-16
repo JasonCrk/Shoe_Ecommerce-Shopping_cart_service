@@ -10,7 +10,7 @@ import java.util.Objects;
 public final class Cart {
     private final CartId id;
     private final UserId userId;
-    private final CartTotalCount totalCount;
+    private CartTotalCount totalCount;
 
     public Cart(CartId id, UserId userId, CartTotalCount totalCount) {
         this.id = id;
@@ -21,6 +21,10 @@ public final class Cart {
     public static Cart create(CartId id, UserId userId) {
         Cart cart = new Cart(id, userId, new CartTotalCount(0));
         return cart;
+    }
+
+    public void incrementTotalCount() {
+        totalCount = totalCount.increment();
     }
 
     public CartId id() {
