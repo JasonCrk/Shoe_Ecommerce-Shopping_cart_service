@@ -28,6 +28,12 @@ public class JpaCartItem {
     @Column(name = "shoe_inventory_id", columnDefinition = "BINARY(16)", nullable = false)
     private UUID shoeInventoryId;
 
+    @Column(name = "shoe_variant_id", columnDefinition = "BINARY(16)", nullable = false)
+    private UUID shoeVariantId;
+
+    @Column(name = "shoe_model_id", columnDefinition = "BINARY(16)", nullable = false)
+    private UUID shoeModelId;
+
     @Column(name = "count", columnDefinition = "SMALLINT UNSIGNED", nullable = false)
     private int count;
 }
