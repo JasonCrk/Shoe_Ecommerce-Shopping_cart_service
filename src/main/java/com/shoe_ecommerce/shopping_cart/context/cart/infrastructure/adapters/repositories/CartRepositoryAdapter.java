@@ -10,6 +10,8 @@ import com.shoe_ecommerce.shopping_cart.context.shared.domain.value_objects.User
 
 import com.shoe_ecommerce.shopping_cart.shared.domain.Service;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.Optional;
 
 @Service
@@ -22,22 +24,32 @@ public final class CartRepositoryAdapter implements CartRepository {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<Cart> findByUserId(UserId userId) {
         return repository.findByUserId(userId.uuid()).map(CartMapper::toEntity);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public boolean existsByIdAndUserId(CartId cartId, UserId userId) {
         return repository.existsByIdAndUserId(cartId.uuid(), userId.uuid());
     }
 
     @Override
+    @Transactional(readOnly = true)
     public boolean existsByUserId(UserId userId) {
         return repository.existsByUserId(userId.uuid());
     }
 
     @Override
+    @Transactional
     public Cart save(Cart cart) {
         return CartMapper.toEntity(repository.save(CartMapper.toModel(cart)));
+    }
+
+    @Override
+    @Transactional
+    public void reduceCountById(CartId cartId, int reduction) {
+        repository.reduceCountById(cartId.uuid(), reduction);
     }
 }

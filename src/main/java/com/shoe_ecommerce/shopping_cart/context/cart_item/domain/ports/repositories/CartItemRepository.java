@@ -5,6 +5,7 @@ import com.shoe_ecommerce.shopping_cart.context.cart_item.domain.CartItem;
 import com.shoe_ecommerce.shopping_cart.context.cart_item.domain.value_objects.CartItemId;
 
 import com.shoe_ecommerce.shopping_cart.context.shared.domain.value_objects.ShoeInventoryId;
+import com.shoe_ecommerce.shopping_cart.context.shared.domain.value_objects.ShoeModelId;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,6 +13,7 @@ import java.util.Optional;
 public interface CartItemRepository {
     Optional<CartItem> findById(CartItemId cartItemId);
     List<CartItem> findAllByCartId(CartId cartId);
+    List<CartItem> findAllByShoeModelId(ShoeModelId shoeModelId);
 
     boolean existsByCartIdAndShoeInventoryId(CartId cartId, ShoeInventoryId shoeInventoryId);
 
@@ -19,4 +21,5 @@ public interface CartItemRepository {
 
     void deleteById(CartItemId cartItemId);
     void deleteAllByCartId(CartId cartId);
+    void deleteAllByShoeModelId(ShoeModelId shoeModelId);
 }

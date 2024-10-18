@@ -8,6 +8,7 @@ import com.shoe_ecommerce.shopping_cart.context.cart_item.infrastructure.persist
 import com.shoe_ecommerce.shopping_cart.context.cart_item.infrastructure.persistence.JpaCartItemRepository;
 
 import com.shoe_ecommerce.shopping_cart.context.shared.domain.value_objects.ShoeInventoryId;
+import com.shoe_ecommerce.shopping_cart.context.shared.domain.value_objects.ShoeModelId;
 
 import com.shoe_ecommerce.shopping_cart.shared.domain.Service;
 
@@ -34,6 +35,23 @@ public final class CartItemRepositoryAdapter implements CartItemRepository {
     }
 
     @Override
+    @Transactional(readOnly = true)
+    public List<CartItem> findAllByShoeInventoryId(ShoeInventoryId shoeInventoryId) {
+        return repository.findAllByShoeInventoryId(shoeInventoryId.uuid()).stream()
+                .map(CartItemMapper::toEntity)
+                .toList();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<CartItem> findAllByShoeModelId(ShoeModelId shoeModelId) {
+        return repository.findAllByShoeInventoryId(shoeModelId.uuid()).stream()
+                .map(CartItemMapper::toEntity)
+                .toList();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
     public boolean existsByCartIdAndShoeInventoryId(CartId cartId, ShoeInventoryId shoeInventoryId) {
         return repository.existsByCartIdAndShoeInventoryId(cartId.uuid(), shoeInventoryId.uuid());
     }
@@ -57,7 +75,14 @@ public final class CartItemRepositoryAdapter implements CartItemRepository {
     }
 
     @Override
+    @Transactional
     public void deleteAllByCartId(CartId cartId) {
         repository.deleteAllByCartId(cartId.uuid());
+    }
+
+    @Override
+    @Transactional
+    public void deleteAllByShoeModelId(ShoeModelId shoeModelId) {
+        repository.deleteAllByShoeModelId(shoeModelId.uuid());
     }
 }

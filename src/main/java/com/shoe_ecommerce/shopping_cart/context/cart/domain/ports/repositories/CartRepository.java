@@ -13,4 +13,6 @@ public interface CartRepository {
     boolean existsByUserId(UserId userId);
 
     Cart save(Cart cart);
+
+    void reduceCountById(CartId cartId, int reduction);
 }
