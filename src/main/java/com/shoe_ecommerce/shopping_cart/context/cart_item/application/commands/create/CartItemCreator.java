@@ -11,6 +11,7 @@ import com.shoe_ecommerce.shopping_cart.context.cart_item.domain.value_objects.C
 import com.shoe_ecommerce.shopping_cart.context.shared.domain.entities.ShoeInventory;
 import com.shoe_ecommerce.shopping_cart.context.shared.domain.exceptions.ExcessShoeInventoryStock;
 import com.shoe_ecommerce.shopping_cart.context.shared.domain.exceptions.ShoeInventoryAlreadyInTheCart;
+import com.shoe_ecommerce.shopping_cart.context.shared.domain.exceptions.ShoeVariantDiscontinuedError;
 import com.shoe_ecommerce.shopping_cart.context.shared.domain.ports.services.ShoeInventoryService;
 import com.shoe_ecommerce.shopping_cart.context.shared.domain.value_objects.ShoeInventoryId;
 import com.shoe_ecommerce.shopping_cart.context.shared.domain.value_objects.UserId;
@@ -42,6 +43,9 @@ public final class CartItemCreator {
             UserId userId
     ) {
         ShoeInventory shoeInventory = shoeInventoryService.getById(shoeInventoryId);
+
+        if (shoeInventory.variant().isDiscontinued().value())
+            throw new ShoeVariantDiscontinuedError(shoeInventory.variant().id());
 
         if (count.value() > shoeInventory.stock().value())
             throw new ExcessShoeInventoryStock(count);
