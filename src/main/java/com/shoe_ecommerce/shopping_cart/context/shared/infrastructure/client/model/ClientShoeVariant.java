@@ -4,6 +4,7 @@ public record ClientShoeVariant(
         String id,
         String name,
         double price,
-        boolean isDiscontinued
+        boolean isDiscontinued,
+        String shoeModelId
 ) {
 }
